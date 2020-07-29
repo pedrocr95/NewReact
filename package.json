@@ -1,0 +1,23 @@
+{
+  "name": "newreact",
+  "version": "1.0.0",
+  "description": "Project to learn REACT in 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrocr95/NewReact.git"
+  },
+  "author": "Pedro Crespillo Romero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrocr95/NewReact/issues"
+  },
+  "homepage": "https://github.com/pedrocr95/NewReact#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

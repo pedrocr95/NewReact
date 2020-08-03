@@ -1,13 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 
 
 
-function Header() {
 
+const Header = () => {
 
-    return (<div>HI</div>);
+    return (<div>HIaa</div>);
 }
 
 

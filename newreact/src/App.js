@@ -16,10 +16,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Readdsadct
         </a>
       </header>
-    </div>
+    </div> 
   );
 }
 

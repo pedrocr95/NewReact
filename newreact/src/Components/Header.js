@@ -1,12 +1,12 @@
 import React from 'react';
 
+const Header = (props) => {
+    const header = <div>
+        <div>{props.name} tiene {props.age}</div>
+        <input onChange={props.write} />
+    </div>;
 
-
-
-
-const Header = () => {
-
-    return (<div>HIaa</div>);
+    return header;
 }
 
 

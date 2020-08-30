@@ -36,7 +36,7 @@ const App = props => {
         const personIndex = personState.persons.findIndex(p => {
             return p.id == id;
         });
-      
+
         const person = { ...personState.persons[personIndex] };
         person.name = event.target.value;
         const persons = [...personState.persons];

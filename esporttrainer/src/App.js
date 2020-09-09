@@ -5,13 +5,17 @@ import Statistics from './Components/Statistics';
 
 
 const App = props => {
+  const [playerListState, setPlayerListState] = useState({
+    selectedPlayer: { matches: [] }
+  });
   const [dataLoad, setDataload] = useState({
-    history: { matches: [] }
+    selectedPlayer: { matches: [] }
   });
 
   const [showStatist, setShowStatistState] = useState({
     load: false,
-    list: false,
+    gameList: false,
+    playerSelected: false,
     showMatch: false,
     match: {}
   });
@@ -23,23 +27,28 @@ const App = props => {
 
   const loadData = () => {
     const load = true;
-    if (!showStatist.list && !showStatist.load) {
+    if (!showStatist.load) {
       //top 205 players
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open("GET", topPlayers, false);
       xmlHttp.send();
-      let users = {};
-
+      let users;
       users = JSON.parse(xmlHttp.responseText);
-      let playerData = corsError + 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + users[0].summonerName + apiKey;
 
+      setPlayerListState(users);
+
+
+
+
+
+      let playerData = corsError + 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + users[0].summonerName + apiKey;
       //datos usuario
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open("GET", playerData, false);
       xmlHttp.send();
       let accountId = JSON.parse(xmlHttp.responseText).accountId
 
-
+      console.log(playerListState);
       //historial usuario
       let matchHistory = corsError + 'https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/' + accountId + apiKey;
       var xmlHttp = new XMLHttpRequest();
@@ -48,18 +57,18 @@ const App = props => {
       let aMatchHistory = JSON.parse(xmlHttp.responseText);
 
       setDataload({
-        history: aMatchHistory
+        selectedPlayer: aMatchHistory
       });
     }
     setShowStatistState({
       load: load,
-      list: !showStatist.list,
+      gameList: !showStatist.gameList,
       showMatch: false,
       match: {}
     });
-
-
   }
+
+
   const showGame = (gameId) => {
     const gameSelected = {}
     //Informacion de la partida
@@ -72,7 +81,7 @@ const App = props => {
     const showState = { ...showStatist };
     showState.match = JSON.parse(xmlHttp.responseText);
     showState.showMatch = true;
-    showState.list = !showStatist.list;
+    showState.gameList = !showStatist.gameList;
     setShowStatistState(
       showState
     );
@@ -80,8 +89,8 @@ const App = props => {
 
   return (<div>
     <button onClick={loadData}> Show person </button>
-    {showStatist.list ?
-      dataLoad.history.matches.map((match) => {
+    {showStatist.playerSelected ?
+      dataLoad.selectedPlayer.matches.map((match) => {
         return <StatisticsHistorical
           key={match.gameId}
           history={match
@@ -89,6 +98,18 @@ const App = props => {
           click={() => showGame(match.gameId)}
         />
       })
+      : null}
+
+    {showStatist.gameList ?
+      /*dataLoad.selectedPlayer.matches.map((match) => {
+        return <StatisticsHistorical
+          key={match.gameId}
+          history={match
+          }
+          click={() => showGame(match.gameId)}
+        />
+      })*/
+      console.log(playerListState)
       : null}
     {showStatist.showMatch ? <Statistics game={showStatist.match} /> : null}
   </div >

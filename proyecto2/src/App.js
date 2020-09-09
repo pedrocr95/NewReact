@@ -38,7 +38,7 @@ const App = props => {
 
   return (<div>
     <InputComponent changed={changeWord} word={wordState.word.word} />
-    <ValidationComponent validation={wordState.word.word} />
+    <ValidationComponent validation-={wordState.word.word} />
     {charComponent}
 
 

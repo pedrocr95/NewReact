@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Components/Header'
 import './App.css';
 
+
 const App = props => {
 
     const [personState, setPersonState] = useState({
@@ -20,7 +21,8 @@ const App = props => {
     const showPersons = () => {
         setShowState({
             show: !showState.show
-        })
+        });
+
     }
 
     /*const switchNameHandler = () => {
@@ -60,6 +62,7 @@ const App = props => {
 
     let showValues = null;
     if (showState.show) {
+
         showValues = (<div>
             {personState.persons.map((person, index) => {
                 return <Header name={person.name}
